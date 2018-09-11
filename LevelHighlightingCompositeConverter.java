@@ -23,7 +23,7 @@ public class LevelHighlightingCompositeConverter extends ForegroundCompositeConv
             case Level.DEBUG_INT:
                 return ANSIConstants.BOLD+ANSIConstants.GREEN_FG;
             default:
-                return null;
+                return ANSIConstants.DEFAULT_FG;
         }
     }
 }
