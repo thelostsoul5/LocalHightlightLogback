@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration>
+    <property name="STDOUT_PATTERN"
+              value="%blue(%d{yyyy-MM-dd HH:mm:ss.SSS}) %levelHighlight(%5p) %magenta(%pid) --- [%15.15t] %boldCyan(%-40.40logger{39} [%4.4line]) : %m%n" />
+    <property name="FILE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5.5level %pid --- [%15.15thread] %-40.40logger{40} [%4.4line] : %msg%n" />
+    <property name="LOGGINE_FILE_HOME" value="F:\logs" />
+    <!-- Errors were reported during translation. -->
+    <!-- Could not find transformer for org.apache.log4j.AIPatternLayout -->
+    <appender name="file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.path:-${LOGGINE_FILE_HOME}}\${logging.file.name:-test}.log</file>
+        <append>true</append>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logging.file.name:-test}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${logging.file.max.size:-100MB}</maxFileSize>
+            <maxHistory>${logging.file.max.history:-10}</maxHistory>
+            <totalSizeCap>${logging.file.total.size,cap:-20GB}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } --- [%15.15t] %-40.40logger{39} [%4.4line] : %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder
+                class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="PatternLayout">
+                <pattern>
+                    ${logging.console.pattern:-${STDOUT_PATTERN}}
+                </pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <logger name="com.asiainfo.order" level="debug"/>
+    <logger name="org.apache.zookeeper" level="error"/>
+    <logger name="com.ailk" level="debug"/>
+    <logger name="com.asiainfo.cache.redis" level="error"/>
+    <logger name="com.asiainfo.sec" level="debug"/>
+    <logger name="com.ai.appframe2" level="debug"/>
+    <logger name="com.ai.appframe2.complex.cache" level="error"/>
+    <logger name="com.ai" level="debug"/>
+    <logger name="com.ai.aif.csf.protocol.socket.event.handler" level="error"/>
+    <logger name="com.ai.common.cau.query" level="error"/>
+    <root level="DEBUG">
+        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
