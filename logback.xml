@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="STDOUT_PATTERN"
-              value="%blue(%d{yyyy-MM-dd HH:mm:ss.SSS}) %levelHighlight(%5p) %magenta(%pid) --- [%15.15t] %boldCyan(%-40.40logger{39} [%4.4line]) : %m%n" />
+              value="%blue(%d{yyyy-MM-dd HH:mm:ss.SSS}) %levelHighlight(%5p) %magenta(%pid) --- %cyan([%15.15t]) \r\n%replace(%caller{1}){'\t|Caller.{1}0', ''} : %boldWhite(%m%n)" />
     <property name="FILE_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5.5level %pid --- [%15.15thread] %-40.40logger{40} [%4.4line] : %msg%n" />
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %pid --- [%15.15t] %-40.40logger{39} [%4.4line] : %m%n" />
     <property name="LOGGINE_FILE_HOME" value="F:\logs" />
 
     <appender name="file"
